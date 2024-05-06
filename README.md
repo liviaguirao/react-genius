@@ -15,6 +15,8 @@
 
 * Para atualizar a main: `git pull`
 
+* Para iniciar um ambiente de desenvolvimento: `npm run dev` e abrir o link fornecido
+  
 * Adicione as alterações feitas: `git add .`
 
 * Cheque em qual branch você está e quais alterações foram adicionadas: `git status`
