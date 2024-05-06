@@ -1,5 +1,10 @@
-export default function Layout (){
-    return <div>
-        hello word
+import './Layout.css'
+
+function Layout() {
+    return <div className="div">
+       hello word
     </div>
+
 }
+   
+   export default Layout
