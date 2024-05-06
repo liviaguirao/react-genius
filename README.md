@@ -1,12 +1,19 @@
 ### Desenvolvendo o Jogo Genius em react
-Genius era um brinquedo muito popular na década de 1980 distribuído pela Brinquedos Estrela. O brinquedo buscava estimular a memorização de cores e sons.
-![jogo genius](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pbkids.com.br%2Fjogo-genius%2Fp&psig=AOvVaw3W3tzOdaUzk-bRJSsC1Z36&ust=1715092770193000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLjb5syg-YUDFQAAAAAdAAAAABAE)
+ Genius era um brinquedo muito popular na década de 1980 distribuído pela Brinquedos Estrela. O brinquedo buscava estimular a memorização de cores e sons.
+
+<p align="center">
+  <img src="https://rihappy.vtexassets.com/arquivos/ids/210529-800-auto?v=634804657283000000&width=800&height=auto&aspect=true" alt="jogo genius" width="30%">
+</p>
 
 ### Primeira Configuração
 
+* Entre na pasta criada pelo comando clone: cd /caminho/para/a/pasta/nova
+  
 * Crie um clone do repositório: `git clone https://github.com/link-do-repositorio`
 
 ### Rotina
+
+* Para atualizar a main: `git pull`
 
 * Adicione as alterações feitas: `git add .`
 
@@ -15,9 +22,3 @@ Genius era um brinquedo muito popular na década de 1980 distribuído pela Brinq
 * Dê um commit com uma mensagem especificando as alterações realizadas: `git commit -m "mensagem especificando o que foi feito"`
 
 * Envie o commit feito para sua branch: `git push origin suabranch`
-
-### Comandos Básicos
-
-* Para atualizar a main: `git pull`
-
-* Ver informações da branch: `git status`
