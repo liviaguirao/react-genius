@@ -24,3 +24,5 @@
 * Dê um commit com uma mensagem especificando as alterações realizadas: `git commit -m "mensagem especificando o que foi feito"`
 
 * Envie o commit feito para sua branch: `git push origin suabranch`
+
+###
