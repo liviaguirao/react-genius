@@ -1,0 +1,48 @@
+/* Configurando Botões */
+.geniusButton {
+  width: 100px;
+  height: 100px;
+  margin: 0.3rem;
+  border: none;
+  border-radius: 0%;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.geniusButton:hover {
+  opacity: 0.8;
+}
+
+.geniusButton:active {
+  transform: scale(0.95);
+}
+
+.geniusButton[data-color="red"]{
+  background-color: red;
+}
+
+.geniusButton[data-color="green"]{
+  background-color: green;
+}
+
+.geniusButton[data-color="blue"]{
+  background-color: blue;
+}
+
+.geniusButton[data-color="yellow"]{
+  background-color: yellow;
+}
+
+.geniusButton[data-rounded-corner="top-left"]{
+  border-radius: 90% 10% 10% 10%;
+}
+.geniusButton[data-rounded-corner="top-right"]{
+  border-radius: 10% 90% 10% 10%;
+}
+.geniusButton[data-rounded-corner="bottom-right"]{
+  border-radius: 10% 10% 90% 10%;
+}
+.geniusButton[data-rounded-corner="bottom-left"]{
+  border-radius: 10% 10% 10% 90%;
+}
