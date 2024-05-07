@@ -27,8 +27,11 @@ const Button = ({ color, onClick , roundedCorner}) => {
 
 
 function Layout() {
+    const nivel = 1;
+    const nivelMaximo = 1;
+
     return <body>
-        <h1>Genius</h1>
+        <h1>GENIUS</h1>
         <div>
             <Button color={'red'} roundedCorner={'top-left'}/>
             <Button color={'blue'} roundedCorner={'top-right'}/>
@@ -37,11 +40,14 @@ function Layout() {
             <Button color={'yellow'} roundedCorner={'bottom-left'}/>
             <Button color={'green'} roundedCorner={'bottom-right'}/>
         </div>
+        <div className='status'>
+        <span>Nível: {nivel}</span>
+        <span>Nível máximo: {nivelMaximo}</span>
+        </div>
       
     </body>
 
 }
-   
 export default Layout
 
    
