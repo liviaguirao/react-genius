@@ -1,62 +1,32 @@
-import './Layout.css'
-
-const Button = ({ color, onClick , roundedCorner}) => {
-    let borderRadius = '0%';
-    if (color === 'red' && roundedCorner === 'top-left') {
-        borderRadius = '90% 10% 10% 10%';
-      } else if (color === 'blue' && roundedCorner === 'top-right') {
-        borderRadius = '10% 90% 10% 10%';
-      } else if (color === 'yellow' && roundedCorner === 'bottom-left') {
-        borderRadius = '10% 10% 10% 90%';
-      } else if (color === 'green' && roundedCorner === 'bottom-right') {
-        borderRadius = '10% 10% 90% 10%';
-      }
-
-    return (
-      <button
-        className="genius-button"
-        style={{ backgroundColor: color, borderRadius: borderRadius}}
-        onClick={() => onClick(color)}
-      />
-    );
-  };
-  
-
-
-
-
+import GeniusButton from "./GeniusButton";
+import styles from "./Layout.module.css";
 
 function Layout() {
-    const nivel = 1;
-    const nivelMaximo = 1;
+  const nivel = 1;
+  const nivelMaximo = 1;
 
-    return <body>
-        <h1>GENIUS</h1>
-        <button className='botaoStart'>Start</button>
-        <div className='jogo'>
-          <div className='circulo'>
+  return (
+    <div>
+      <h1>GENIUS</h1>
+      <button className={styles.botaoStart}>Start</button>
+      <div className={styles.jogo}>
+        <div className={styles.circulo}>
           <div>
-            <Button color={'red'} roundedCorner={'top-left'} />
-            <Button color={'blue'} roundedCorner={'top-right'}/>
+            <GeniusButton color={"red"} roundedCorner={"top-left"} />
+            <GeniusButton color={"blue"} roundedCorner={"top-right"} />
           </div>
           <div>
-            <Button color={'yellow'} roundedCorner={'bottom-left'}/>
-            <Button color={'green'} roundedCorner={'bottom-right'}/>
-          </div>
+            <GeniusButton color={"yellow"} roundedCorner={"bottom-left"} />
+            <GeniusButton color={"green"} roundedCorner={"bottom-right"} />
           </div>
         </div>
+      </div>
 
-        <div className='status'>
-         <span>Nível: {nivel}</span>
-         <span>Nível máximo: {nivelMaximo}</span>
-        </div>
-      
-    </body>
-
+      <div className={styles.status}>
+        <span>Nível: {nivel}</span>
+        <span>Nível máximo: {nivelMaximo}</span>
+      </div>
+    </div>
+  );
 }
-export default Layout
-
-   
-
-
-
+export default Layout;

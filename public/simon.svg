@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   enable-background="new 0 0 2500 2500"
+   viewBox="0 0 2500 2500"
+   version="1.1"
+   id="svg20"
+   sodipodi:docname="simon.svg"
+   inkscape:version="1.3.1 (9b9bdc1480, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs20" />
+  <sodipodi:namedview
+     id="namedview20"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.3276"
+     inkscape:cx="1248.4737"
+     inkscape:cy="1250"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg20" />
+  <circle
+     cx="1250"
+     cy="1250"
+     r="1250"
+     id="circle1" />
+  <circle
+     cx="1250"
+     cy="1250"
+     fill="#b3b3b3"
+     r="672"
+     id="circle2" />
+  <path
+     d="m1096 2382.3c-511.8-69.1-916.1-476.9-979.8-990.3m2267.7-.1c-64.8 522.6-482.3 935.8-1006.7 993.5m0-2270.9c525.5 58.1 943.5 472.6 1007 996.2"
+     fill="none"
+     stroke="#000"
+     stroke-miterlimit="10"
+     id="path2" />
+  <path
+     d="m1377.2 1991.9v393.5c524.5-58.1 941.9-471.2 1006.7-993.5h-394.6c-58.7 306.8-303.3 547.6-612.1 600z"
+     fill="#0f5"
+     id="path3" />
+  <path
+     d="m1377.2 114.5v393.5c309.9 52.7 555.1 294.6 612.9 603h394.4c-64.1-523.9-482.1-938.4-1007.3-996.5z"
+     fill="#eded00"
+     id="path4" />
+  <path
+     d="m510.8 1391.9h-394.7c63.7 513.4 468 921.5 979.8 990.3v-395.2c-295.9-61.7-528.4-297.2-585.1-595.1z"
+     fill="#ff002b"
+     id="path5" />
+  <path
+     d="m1096 513.2v-395.2c-512.6 68.8-917.5 478-980.1 992.7h394.4c55.8-299.1 288.6-536 585.7-597.5z"
+     fill="#00e1ff"
+     id="path6" />
+  <path
+     d="m1250 645.2c-286 0-525.5 198.4-588.4 465.1h1177.2c-63.3-266.8-302.8-465.1-588.8-465.1z"
+     id="path7" />
+  <circle
+     cx="871"
+     cy="1551.1"
+     r="78"
+     id="circle8" />
+  <circle
+     cx="871"
+     cy="1551.1"
+     fill="#eded00"
+     r="60.5"
+     id="circle9" />
+  <circle
+     cx="1250"
+     cy="1551.1"
+     r="78"
+     id="circle10" />
+  <circle
+     cx="1250"
+     cy="1551.1"
+     fill="#ff002b"
+     r="60.5"
+     id="circle11" />
+  <circle
+     cx="1631.7"
+     cy="1551.1"
+     r="78"
+     id="circle12" />
+  <circle
+     cx="1631.7"
+     cy="1551.1"
+     fill="#0f5"
+     r="60.5"
+     id="circle13" />
+  <path
+     d="m1129.8 1714.2h74.5v69.4h-74.5z"
+     fill="#35cbff"
+     id="path13" />
+  <path
+     d="m1204.3 1714.2h74.5v69.4h-74.5z"
+     fill="#3cacdd"
+     id="path14" />
+  <path
+     d="m1278.5 1714.2h74.5v69.4h-74.5zm7.3-421.2h141.4v98.7h-141.4z"
+     fill="#35cbff"
+     id="path15" />
+  <path
+     d="m1427.2 1293h141.4v98.7h-141.4z"
+     fill="#3cacdd"
+     id="path16" />
+  <path
+     d="m1568.3 1293h141.4v98.7h-141.4z"
+     fill="#35cbff"
+     id="path17" />
+  <path
+     d="m780.4 1306.2h97.6v67.2h-97.6z"
+     fill="#4d4d4d"
+     id="path18" />
+  <path
+     d="m878 1306.2h97.6v67.2h-97.6z"
+     id="path19" />
+  <path
+     d="m975.3 1306.2h97.6v67.2h-97.6z"
+     fill="#4d4d4d"
+     id="path20" />
+</svg>
