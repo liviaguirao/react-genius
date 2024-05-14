@@ -82,13 +82,14 @@ function Layout() {
 
   let cont = 0;
   function handleButtonClick(color) {
-    // Esta função será chamada quando um botão for clicado
+    // Esta função preenche um vetor com os botoes clicados pelo jogador
     console.log('Botão ${color} clicado');
     sequenceclick = sequenceclick.concat(color);
     console.log(sequenceclick);
   };
 
   function verifica() {
+    // Esta função verifica se a sequencia clicada é igual a sequencia gerada pelo jogo
     console.log(" sequenceclick.length: " + sequenceclick.length);
     var acertou = true;
     for (let int = 0; int < sequenceclick.length; int++) {
@@ -107,12 +108,14 @@ function Layout() {
     }
   }
   function handleCombinedClick(color) {
+    // Esta função será chamada quando um botão for clicado
     handleButtonClick(color);
+    //se ele clicou na quantidade de botoes previsto para aquele nivel, a funçao de verificação é chamada para ver se errou ou acertou
     if (sequenceclick.length === nivel) {
       verifica();
     }
   }
-  
+
   return (
     <div>
       <h1>GENIUS</h1>
