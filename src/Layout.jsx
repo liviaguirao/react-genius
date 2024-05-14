@@ -1,30 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import GeniusButton from "./GeniusButton";
 import styles from "./Layout.module.css";
 
 function Layout() {
   const [sequence, setSequence] = useState([]);
-  var sequenceclick = Array.from({ length: 0 });
-  var nivel = 1;
-  const [nivelMaximo, setNivelMaximo] = useState(1);
-
-
+  const [sequenceclick, setSequenceClick] = useState([]);
+  const nivelRef = useRef(0); // Usando useRef para criar uma referência para o nível
+  const nivelMaximo = useRef(1);
 
   const startGame = () => {
-    const newSequence = generateSequence(); // Salva a nova sequência
-    console.log('Sequência a:', newSequence); // Loga a nova sequência
-    setTimeout(() => playSequence(newSequence), 1000); // Passa a nova sequência para playSequence após 1 segundo
-
+    nivelRef.current = 0;
+    const newSequence = generateSequence();
+    console.log('Sequência a:', newSequence);
+    setTimeout(() => playSequence(newSequence), 1000);
   };
 
-  const playSequence = async (sequence) => { // Recebe a sequência como argumento
+  const playSequence = async (sequence) => {
     console.log('piscando');
-    for (let i = 0; i < nivel; i++) {
-      // Obtém a cor correspondente ao número na sequência
+    for (let i = 0; i <= nivelRef.current; i++) {
       const color = getColorFromNumber(sequence[i]);
-      // Aguarda 1 segundo antes de mudar para a próxima cor
       await sleep(1000);
-      // Faz o botão piscar durante 1 segundo
       await blinkButton(color);
     }
   };
@@ -33,10 +28,10 @@ function Layout() {
     let newSequence;
     do {
       newSequence = Array.from({ length: 5 }, () => Math.floor(Math.random() * 4));
-    } while (newSequence.every(num => num === 0)); // Verifica se todos são 0
+    } while (newSequence.every(num => num === 0));
     console.log('Sequência atual:', newSequence);
     setSequence(newSequence);
-    return newSequence; // Retorna a nova sequência
+    return newSequence;
   };
 
   const getColorFromNumber = (number) => {
@@ -49,14 +44,14 @@ function Layout() {
         return 'yellow';
       case 3:
         return 'green';
+      default:
+        return '';
     }
   };
 
   const blinkButton = async (color) => {
-    // Define a cor clara com base na cor original
     const lightColor = getLightColor(color);
     const button = document.getElementById(color);
-    // Alterna a cor do botão para a cor clara durante 500ms
     button.style.backgroundColor = lightColor;
     await sleep(500);
     button.style.backgroundColor = color;
@@ -65,53 +60,52 @@ function Layout() {
   const getLightColor = (color) => {
     switch (color) {
       case 'red':
-        return '#ff9999'; // Vermelho claro
+        return '#ff9999';
       case 'blue':
-        return '#99ccff'; // Azul claro
+        return '#99ccff';
       case 'yellow':
-        return 'rgb(255, 255, 246)'; // Amarelo claro
+        return '#ffff99';
       case 'green':
-        return '#99ff99'; // Verde claro
+        return '#99ff99';
+      default:
+        return '';
     }
   };
 
   const sleep = (ms) => {
-    // Função de utilidade para aguardar um determinado número de milissegundos
     return new Promise(resolve => setTimeout(resolve, ms));
   };
 
-  let cont = 0;
   function handleButtonClick(color) {
-    // Esta função preenche um vetor com os botoes clicados pelo jogador
     console.log('Botão ${color} clicado');
-    sequenceclick = sequenceclick.concat(color);
-    console.log(sequenceclick);
+    setSequenceClick(prevClicks => [...prevClicks, color]);
   };
 
   function verifica() {
-    // Esta função verifica se a sequencia clicada é igual a sequencia gerada pelo jogo
     console.log(" sequenceclick.length: " + sequenceclick.length);
     var acertou = true;
     for (let int = 0; int < sequenceclick.length; int++) {
-      if (sequenceclick[int] != getColorFromNumber(sequence[int])) {
+      if (sequenceclick[int] !== getColorFromNumber(sequence[int])) {
         acertou = false;
         console.log('cor errada ! ' + (int) + '° cor selecionada: ' + sequenceclick[int] + ' alternativa correta: ' + getColorFromNumber(sequence[int]));
       }
     }
     if (acertou) {
-      sequenceclick.splice(0, sequenceclick.length);
-      nivel++;
+      setSequenceClick([]);
+      nivelRef.current++; // Atualiza o nível através da referência
+      if(nivelRef.current > nivelMaximo.current){
+        nivelMaximo.current++;
+      }
       setTimeout(() => playSequence(sequence), 1000);
-    }
-    else {
+    } else {
+      setSequenceClick([]);
       alert('Você errou a sequência! Tente novamente.');
+
     }
   }
   function handleCombinedClick(color) {
-    // Esta função será chamada quando um botão for clicado
     handleButtonClick(color);
-    //se ele clicou na quantidade de botoes previsto para aquele nivel, a funçao de verificação é chamada para ver se errou ou acertou
-    if (sequenceclick.length === nivel) {
+    if (sequenceclick.length === nivelRef.current) {
       verifica();
     }
   }
@@ -134,8 +128,8 @@ function Layout() {
       </div>
 
       <div className={styles.status}>
-        <span>Nível: {nivel}</span>
-        <span>Nível máximo: {nivelMaximo}</span>
+        <span>Nível: {nivelRef.current +1}</span> {/* Usando nivelRef.current para exibir o nível */}
+        <span>Nível máximo: {nivelMaximo.current}</span>
       </div>
     </div>
   );
