@@ -5,7 +5,7 @@ import styles from "./Layout.module.css";
 function Layout() {
   const [sequence, setSequence] = useState([]);
   const [sequenceclick, setSequenceClick] = useState([]);
-  const nivelRef = useRef(0); // Usando useRef para criar uma referência para o nível
+  const nivelRef = useRef(0);
   const nivelMaximo = useRef(1);
 
   const startGame = () => {
@@ -17,9 +17,13 @@ function Layout() {
 
   const playSequence = async (sequence) => {
     console.log('piscando');
+    const baseInterval = 1000;
+    const numButtons = nivelRef.current + 1; 
+    const interval = baseInterval / Math.sqrt(numButtons); 
+
     for (let i = 0; i <= nivelRef.current; i++) {
       const color = getColorFromNumber(sequence[i]);
-      await sleep(1000);
+      await sleep(interval);
       await blinkButton(color);
     }
   };
@@ -27,7 +31,7 @@ function Layout() {
   const generateSequence = () => {
     let newSequence;
     do {
-      newSequence = Array.from({ length: 5 }, () => Math.floor(Math.random() * 4));
+      newSequence = Array.from({ length: 200 }, () => Math.floor(Math.random() * 4));
     } while (newSequence.every(num => num === 0));
     console.log('Sequência atual:', newSequence);
     setSequence(newSequence);
@@ -92,7 +96,7 @@ function Layout() {
     }
     if (acertou) {
       setSequenceClick([]);
-      nivelRef.current++; // Atualiza o nível através da referência
+      nivelRef.current++;
       if(nivelRef.current > nivelMaximo.current){
         nivelMaximo.current++;
       }
@@ -100,7 +104,6 @@ function Layout() {
     } else {
       setSequenceClick([]);
       alert('Você errou a sequência! Tente novamente.');
-
     }
   }
   function handleCombinedClick(color) {
@@ -128,7 +131,7 @@ function Layout() {
       </div>
 
       <div className={styles.status}>
-        <span>Nível: {nivelRef.current +1}</span> {/* Usando nivelRef.current para exibir o nível */}
+        <span>Nível: {nivelRef.current +1}</span>
         <span>Nível máximo: {nivelMaximo.current}</span>
       </div>
     </div>
