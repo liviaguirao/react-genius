@@ -4,7 +4,8 @@ import styles from "./Layout.module.css";
 
 function Layout() {
   const [sequence, setSequence] = useState([]);
-  const [sequenceclick, setSequenceClick] = useState([]);
+  const [clickable, setClickable] = useState(false);
+  const sequenceclick = useRef(0);
   const nivelRef = useRef(0);
   const nivelMaximo = useRef(1);
 
@@ -17,15 +18,17 @@ function Layout() {
 
   const playSequence = async (sequence) => {
     console.log('piscando');
+    setClickable(false); // Desativa os cliques
     const baseInterval = 1000;
-    const numButtons = nivelRef.current + 1; 
-    const interval = baseInterval / Math.sqrt(numButtons); 
+    const numButtons = nivelRef.current + 1;
+    const interval = baseInterval / Math.sqrt(numButtons);
 
     for (let i = 0; i <= nivelRef.current; i++) {
       const color = getColorFromNumber(sequence[i]);
       await sleep(interval);
       await blinkButton(color);
     }
+    setClickable(true); // Ativa os cliques após a sequência
   };
 
   const generateSequence = () => {
@@ -80,36 +83,37 @@ function Layout() {
     return new Promise(resolve => setTimeout(resolve, ms));
   };
 
-  function handleButtonClick(color) {
-    console.log('Botão ${color} clicado');
-    setSequenceClick(prevClicks => [...prevClicks, color]);
-  };
-
-  function verifica() {
-    console.log(" sequenceclick.length: " + sequenceclick.length);
+  function verifica(color) {
+    console.log(" sequenceclick " + sequenceclick.current);
     var acertou = true;
-    for (let int = 0; int < sequenceclick.length; int++) {
-      if (sequenceclick[int] !== getColorFromNumber(sequence[int])) {
-        acertou = false;
-        console.log('cor errada ! ' + (int) + '° cor selecionada: ' + sequenceclick[int] + ' alternativa correta: ' + getColorFromNumber(sequence[int]));
-      }
+
+    if (color !== getColorFromNumber(sequence[sequenceclick.current])) {
+      acertou = false;
+      console.log('cor selecionada: ' + color + ' alternativa correta: ' + getColorFromNumber(sequence[sequenceclick.current]));
     }
-    if (acertou) {
-      setSequenceClick([]);
-      nivelRef.current++;
-      if(nivelRef.current > nivelMaximo.current){
-        nivelMaximo.current++;
-      }
-      setTimeout(() => playSequence(sequence), 1000);
-    } else {
-      setSequenceClick([]);
+    if (!acertou) {
       alert('Você errou a sequência! Tente novamente.');
+      sequenceclick.current = 0;
+      setClickable(false); // Desativa os cliques após o erro
+      return false;
     }
+    return true;
   }
+
   function handleCombinedClick(color) {
-    handleButtonClick(color);
-    if (sequenceclick.length === nivelRef.current) {
-      verifica();
+    if (!clickable) return; // Impede cliques se não for permitido
+
+    if (verifica(color)) {
+      sequenceclick.current++;
+      
+      if (sequenceclick.current > nivelRef.current) {
+        if (nivelRef.current >= nivelMaximo.current) {
+          nivelMaximo.current++;
+        }
+        nivelRef.current++;
+        sequenceclick.current = 0;
+        setTimeout(() => playSequence(sequence), 1000);
+      }
     }
   }
 
@@ -120,18 +124,18 @@ function Layout() {
       <div className={styles.jogo}>
         <div className={styles.circulo}>
           <div>
-            <GeniusButton color={"red"} roundedCorner={"top-left"} onClick={handleCombinedClick} />
-            <GeniusButton color={"blue"} roundedCorner={"top-right"} onClick={handleCombinedClick} />
+            <GeniusButton color={"red"} roundedCorner={"top-left"} onClick={() => handleCombinedClick('red')} disabled={!clickable} />
+            <GeniusButton color={"blue"} roundedCorner={"top-right"} onClick={() => handleCombinedClick('blue')} disabled={!clickable} />
           </div>
           <div>
-            <GeniusButton color={"yellow"} roundedCorner={"bottom-left"} onClick={handleCombinedClick} />
-            <GeniusButton color={"green"} roundedCorner={"bottom-right"} onClick={handleCombinedClick} />
+            <GeniusButton color={"yellow"} roundedCorner={"bottom-left"} onClick={() => handleCombinedClick('yellow')} disabled={!clickable} />
+            <GeniusButton color={"green"} roundedCorner={"bottom-right"} onClick={() => handleCombinedClick('green')} disabled={!clickable} />
           </div>
         </div>
       </div>
 
       <div className={styles.status}>
-        <span>Nível: {nivelRef.current +1}</span>
+        <span>Nível: {nivelRef.current + 1}</span>
         <span>Nível máximo: {nivelMaximo.current}</span>
       </div>
     </div>
