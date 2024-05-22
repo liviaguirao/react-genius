@@ -28,7 +28,7 @@ function Layout() {
     oscillator.current.connect(gainNode.current);
     gainNode.current.connect(audioContext.current.destination);
     oscillator.current.start(0);
-    gainNode.current.gain.exponentialRampToValueAtTime(0.00001, audioContext.current.currentTime + 0.5); // Decay over 0.5 seconds
+    gainNode.current.gain.exponentialRampToValueAtTime(0.00001, audioContext.current.currentTime + 0.5);
   };
 
   const stopOscillator = () => {
