@@ -87,13 +87,13 @@ function Layout() {
   const getFrequencyFromColor = (color) => {
     switch (color) {
       case 'red':
-        return 261.6;
+        return 250;
       case 'blue':
-        return 329.6;
+        return 500; 
       case 'yellow':
-        return 392.0;
+        return 800; 
       case 'green':
-        return 523.2;
+        return 1100; 
       default:
         return 440.0;
     }
