@@ -8,6 +8,37 @@ function Layout() {
   const sequenceclick = useRef(0);
   const nivelRef = useRef(0);
   const nivelMaximo = useRef(1);
+  const audioContext = useRef(null);
+  const oscillator = useRef(null);
+  const gainNode = useRef(null);
+
+  useEffect(() => {
+    audioContext.current = new (window.AudioContext || window.webkitAudioContext)();
+    return () => {
+      if (audioContext.current) {
+        audioContext.current.close();
+      }
+    };
+  }, []);
+
+  const startOscillator = (frequency) => {
+    oscillator.current = audioContext.current.createOscillator();
+    gainNode.current = audioContext.current.createGain();
+    oscillator.current.frequency.value = frequency;
+    oscillator.current.type = 'sine';
+    oscillator.current.connect(gainNode.current);
+    gainNode.current.connect(audioContext.current.destination);
+    oscillator.current.start(0);
+    gainNode.current.gain.exponentialRampToValueAtTime(0.00001, audioContext.current.currentTime + 0.5);
+  };
+
+  const stopOscillator = () => {
+    if (oscillator.current) {
+      oscillator.current.stop();
+      oscillator.current.disconnect();
+      gainNode.current.disconnect();
+    }
+  };
 
   const startGame = () => {
     nivelRef.current = 0;
@@ -56,12 +87,30 @@ function Layout() {
     }
   };
 
+  const getFrequencyFromColor = (color) => {
+    switch (color) {
+      case 'red':
+        return 250;
+      case 'blue':
+        return 500; 
+      case 'yellow':
+        return 800; 
+      case 'green':
+        return 1100; 
+      default:
+        return 440.0;
+    }
+  };
+
   const blinkButton = async (color) => {
     const lightColor = getLightColor(color);
     const button = document.getElementById(color);
+    const frequency = getFrequencyFromColor(color);
+    startOscillator(frequency);
     button.style.backgroundColor = lightColor;
     await sleep(500);
     button.style.backgroundColor = color;
+    stopOscillator();
   };
 
   const getLightColor = (color) => {
@@ -99,6 +148,7 @@ function Layout() {
     }
     return true;
   }
+
 
   function handleCombinedClick(color) {
     if (!clickable) return; // Impede cliques se não for permitido
