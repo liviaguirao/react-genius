@@ -132,6 +132,13 @@ function Layout() {
     return new Promise(resolve => setTimeout(resolve, ms));
   };
 
+  function handleButtonClick(color) {
+    console.log(`Botão ${color} clicado`);
+    const frequency = getFrequencyFromColor(color);
+    startOscillator(frequency);
+    setTimeout(stopOscillator, 500);
+  };
+
   function verifica(color) {
     console.log(" sequenceclick " + sequenceclick.current);
     var acertou = true;
@@ -152,7 +159,7 @@ function Layout() {
 
   function handleCombinedClick(color) {
     if (!clickable) return; // Impede cliques se não for permitido
-
+    handleButtonClick(color);
     if (verifica(color)) {
       sequenceclick.current++;
       
