@@ -7,6 +7,37 @@ function Layout() {
   const [sequenceclick, setSequenceClick] = useState([]);
   const nivelRef = useRef(0);
   const nivelMaximo = useRef(1);
+  const audioContext = useRef(null);
+  const oscillator = useRef(null);
+  const gainNode = useRef(null);
+
+  useEffect(() => {
+    audioContext.current = new (window.AudioContext || window.webkitAudioContext)();
+    return () => {
+      if (audioContext.current) {
+        audioContext.current.close();
+      }
+    };
+  }, []);
+
+  const startOscillator = (frequency) => {
+    oscillator.current = audioContext.current.createOscillator();
+    gainNode.current = audioContext.current.createGain();
+    oscillator.current.frequency.value = frequency;
+    oscillator.current.type = 'sine';
+    oscillator.current.connect(gainNode.current);
+    gainNode.current.connect(audioContext.current.destination);
+    oscillator.current.start(0);
+    gainNode.current.gain.exponentialRampToValueAtTime(0.00001, audioContext.current.currentTime + 0.5); // Decay over 0.5 seconds
+  };
+
+  const stopOscillator = () => {
+    if (oscillator.current) {
+      oscillator.current.stop();
+      oscillator.current.disconnect();
+      gainNode.current.disconnect();
+    }
+  };
 
   const startGame = () => {
     nivelRef.current = 0;
@@ -18,8 +49,8 @@ function Layout() {
   const playSequence = async (sequence) => {
     console.log('piscando');
     const baseInterval = 1000;
-    const numButtons = nivelRef.current + 1; 
-    const interval = baseInterval / Math.sqrt(numButtons); 
+    const numButtons = nivelRef.current + 1;
+    const interval = baseInterval / Math.sqrt(numButtons);
 
     for (let i = 0; i <= nivelRef.current; i++) {
       const color = getColorFromNumber(sequence[i]);
@@ -53,12 +84,30 @@ function Layout() {
     }
   };
 
+  const getFrequencyFromColor = (color) => {
+    switch (color) {
+      case 'red':
+        return 261.6;
+      case 'blue':
+        return 329.6;
+      case 'yellow':
+        return 392.0;
+      case 'green':
+        return 523.2;
+      default:
+        return 440.0;
+    }
+  };
+
   const blinkButton = async (color) => {
     const lightColor = getLightColor(color);
     const button = document.getElementById(color);
+    const frequency = getFrequencyFromColor(color);
+    startOscillator(frequency);
     button.style.backgroundColor = lightColor;
     await sleep(500);
     button.style.backgroundColor = color;
+    stopOscillator();
   };
 
   const getLightColor = (color) => {
@@ -81,7 +130,10 @@ function Layout() {
   };
 
   function handleButtonClick(color) {
-    console.log('Botão ${color} clicado');
+    console.log(`Botão ${color} clicado`);
+    const frequency = getFrequencyFromColor(color);
+    startOscillator(frequency);
+    setTimeout(stopOscillator, 500);
     setSequenceClick(prevClicks => [...prevClicks, color]);
   };
 
@@ -106,6 +158,7 @@ function Layout() {
       alert('Você errou a sequência! Tente novamente.');
     }
   }
+
   function handleCombinedClick(color) {
     handleButtonClick(color);
     if (sequenceclick.length === nivelRef.current) {
@@ -131,7 +184,7 @@ function Layout() {
       </div>
 
       <div className={styles.status}>
-        <span>Nível: {nivelRef.current +1}</span>
+        <span>Nível: {nivelRef.current + 1}</span>
         <span>Nível máximo: {nivelMaximo.current}</span>
       </div>
     </div>
