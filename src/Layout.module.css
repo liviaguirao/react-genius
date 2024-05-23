@@ -47,3 +47,14 @@
     justify-content: center;
     flex-direction: column;
 }
+.botaoErro {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px; 
+  cursor: pointer;
+  background-color: red;
+  color: white;
+}

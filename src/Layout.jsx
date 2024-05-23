@@ -5,6 +5,7 @@ import styles from "./Layout.module.css";
 function Layout() {
   const [sequence, setSequence] = useState([]);
   const [clickable, setClickable] = useState(false);
+  const [showErrorButton, setShowErrorButton] = useState(false);
   const sequenceclick = useRef(0);
   const nivelRef = useRef(0);
   const nivelMaximo = useRef(1);
@@ -41,6 +42,7 @@ function Layout() {
   };
 
   const startGame = () => {
+    setShowErrorButton(false);
     nivelRef.current = 0;
     const newSequence = generateSequence();
     console.log('Sequência a:', newSequence);
@@ -141,14 +143,13 @@ function Layout() {
       console.log('cor selecionada: ' + color + ' alternativa correta: ' + getColorFromNumber(sequence[sequenceclick.current]));
     }
     if (!acertou) {
-      alert('Você errou a sequência! Tente novamente.');
+      setShowErrorButton(true);
       sequenceclick.current = 0;
       setClickable(false); // Desativa os cliques após o erro
       return false;
     }
     return true;
   }
-
 
   function handleCombinedClick(color) {
     if (!clickable) return; // Impede cliques se não for permitido
@@ -170,6 +171,14 @@ function Layout() {
   return (
     <div>
       <h1>GENIUS</h1>
+      {showErrorButton && (
+        <button 
+          className={styles.botaoErro} 
+          onClick={startGame} 
+          style={{ backgroundColor: 'red', color: 'white' }}>
+          Você errou, clique aqui para tentar novamente
+        </button>
+      )}
       <div className={styles.jogo}>
         <div className={styles.circulo}>
         <button className={styles.botaoStart} onClick={startGame}>Start</button>
