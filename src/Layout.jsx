@@ -79,7 +79,7 @@ function Layout() {
       case 1:
         return 'blue';
       case 2:
-        return 'yellow';
+        return '#ff9900';
       case 3:
         return 'green';
       default:
@@ -93,7 +93,7 @@ function Layout() {
         return 250;
       case 'blue':
         return 500; 
-      case 'yellow':
+      case '#ff9900':
         return 800; 
       case 'green':
         return 1100; 
@@ -107,22 +107,22 @@ function Layout() {
     const button = document.getElementById(color);
     const frequency = getFrequencyFromColor(color);
     startOscillator(frequency);
-    button.style.backgroundColor = lightColor;
+    button.style.background = lightColor;
     await sleep(500);
-    button.style.backgroundColor = color;
+    button.style.background = color;
     stopOscillator();
   };
 
   const getLightColor = (color) => {
     switch (color) {
       case 'red':
-        return '#ff9999';
+        return 'radial-gradient(96.6% 60.29% at 50% 50%, rgba(255, 255, 255, 0.50) 0%, rgba(233, 0, 0, 0.50) 100%), #F30000';
       case 'blue':
-        return '#99ccff';
-      case 'yellow':
-        return '#ffff99';
+        return 'radial-gradient(103% 67.48% at 50% 50%, rgba(222, 221, 255, 0.50) 0%, rgba(4, 0, 191, 0.50) 100%), #0400D0';
+      case '#ff9900':
+        return 'radial-gradient(69.01% 47.53% at 50% 50%, rgba(255, 255, 185, 0.86) 0%, rgba(255, 255, 0, 0.86) 51%, rgba(255, 214, 0, 0.86) 100%), #FFD600';
       case 'green':
-        return '#99ff99';
+        return 'radial-gradient(96.54% 52.86% at 50.22% 49.83%, rgba(255, 255, 255, 0.50) 0%, rgba(148, 255, 131, 0.50) 38%, rgba(95, 216, 75, 0.50) 69%, rgba(27, 191, 0, 0.50) 99%), #1BBF00';
       default:
         return '';
     }
@@ -130,13 +130,6 @@ function Layout() {
 
   const sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
-  };
-
-  function handleButtonClick(color) {
-    console.log(`Botão ${color} clicado`);
-    const frequency = getFrequencyFromColor(color);
-    startOscillator(frequency);
-    setTimeout(stopOscillator, 500);
   };
 
   function verifica(color) {
@@ -159,7 +152,7 @@ function Layout() {
 
   function handleCombinedClick(color) {
     if (!clickable) return; // Impede cliques se não for permitido
-    handleButtonClick(color);
+    blinkButton(color);
     if (verifica(color)) {
       sequenceclick.current++;
       
@@ -177,15 +170,15 @@ function Layout() {
   return (
     <div>
       <h1>GENIUS</h1>
-      <button className={styles.botaoStart} onClick={startGame}>Start</button>
       <div className={styles.jogo}>
         <div className={styles.circulo}>
+        <button className={styles.botaoStart} onClick={startGame}>Start</button>
           <div>
             <GeniusButton color={"red"} roundedCorner={"top-left"} onClick={() => handleCombinedClick('red')} disabled={!clickable} />
             <GeniusButton color={"blue"} roundedCorner={"top-right"} onClick={() => handleCombinedClick('blue')} disabled={!clickable} />
           </div>
           <div>
-            <GeniusButton color={"yellow"} roundedCorner={"bottom-left"} onClick={() => handleCombinedClick('yellow')} disabled={!clickable} />
+            <GeniusButton color={"#ff9900"} roundedCorner={"bottom-left"} onClick={() => handleCombinedClick('#ff9900')} disabled={!clickable} />
             <GeniusButton color={"green"} roundedCorner={"bottom-right"} onClick={() => handleCombinedClick('green')} disabled={!clickable} />
           </div>
         </div>
