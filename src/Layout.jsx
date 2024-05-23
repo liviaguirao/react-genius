@@ -184,7 +184,7 @@ function Layout() {
           className={styles.botaoErro} 
           onClick={startGame} 
           style={{ backgroundColor: 'red', color: 'white' }}>
-          Você errou, clique para tentar novamente
+          Você errou, clique aqui para tentar novamente
         </button>
       )}
       <div className={styles.jogo}>
