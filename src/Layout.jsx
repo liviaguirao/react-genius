@@ -94,11 +94,11 @@ function Layout() {
       case 'red':
         return 250;
       case 'blue':
-        return 500; 
+        return 500;
       case '#ff9900':
-        return 800; 
+        return 800;
       case 'green':
-        return 1100; 
+        return 1100;
       default:
         return 440.0;
     }
@@ -156,7 +156,7 @@ function Layout() {
     blinkButton(color);
     if (verifica(color)) {
       sequenceclick.current++;
-      
+
       if (sequenceclick.current > nivelRef.current) {
         if (nivelRef.current >= nivelMaximo.current) {
           nivelMaximo.current++;
@@ -171,17 +171,16 @@ function Layout() {
   return (
     <div>
       <h1>GENIUS</h1>
-      {showErrorButton && (
-        <button 
-          className={styles.botaoErro} 
-          onClick={startGame} 
-          style={{ backgroundColor: 'red', color: 'white' }}>
-          Você errou, clique aqui para tentar novamente
-        </button>
-      )}
       <div className={styles.jogo}>
+        {showErrorButton && (
+          <button
+            className={styles.botaoErro}
+            onClick={startGame} >
+            Você errou, clique aqui para tentar novamente
+          </button>
+        )}
         <div className={styles.circulo}>
-        <button className={styles.botaoStart} onClick={startGame}>Start</button>
+          <button className={styles.botaoStart} onClick={startGame}>Start</button>
           <div>
             <GeniusButton color={"red"} roundedCorner={"top-left"} onClick={() => handleCombinedClick('red')} disabled={!clickable} />
             <GeniusButton color={"blue"} roundedCorner={"top-right"} onClick={() => handleCombinedClick('blue')} disabled={!clickable} />
