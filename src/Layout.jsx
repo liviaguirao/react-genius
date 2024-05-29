@@ -169,16 +169,15 @@ function Layout() {
   }
 
   return (
-    <div>
+    <div className={styles.body}>
       <h1>GENIUS</h1>
       <div className={styles.jogo}>
-        {showErrorButton && (
           <button
             className={styles.botaoErro}
+            disabled = {!showErrorButton}
             onClick={startGame} >
             Você errou, clique aqui para tentar novamente
           </button>
-        )}
         <div className={styles.circulo}>
           <button className={styles.botaoStart} onClick={startGame}>Start</button>
           <div>
