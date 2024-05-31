@@ -181,12 +181,12 @@ function Layout() {
         <div className={styles.circulo}>
           <button className={styles.botaoStart} onClick={startGame}>Start</button>
           <div>
-            <GeniusButton color={"red"} roundedCorner={"top-left"} onClick={() => handleCombinedClick('red')} disabled={!clickable} />
-            <GeniusButton color={"blue"} roundedCorner={"top-right"} onClick={() => handleCombinedClick('blue')} disabled={!clickable} />
+            <GeniusButton color={"red"} lightColor={'radial-gradient(96.6% 60.29% at 50% 50%, rgba(255, 255, 255, 0.50) 0%, rgba(233, 0, 0, 0.50) 100%), #F30000'} roundedCorner={"top-left"} onClick={() => handleCombinedClick('red')} disabled={!clickable} />
+            <GeniusButton color={"blue"} lightColor={'radial-gradient(103% 67.48% at 50% 50%, rgba(222, 221, 255, 0.50) 0%, rgba(4, 0, 191, 0.50) 100%), #0400D0'} roundedCorner={"top-right"} onClick={() => handleCombinedClick('blue')} disabled={!clickable} />
           </div>
           <div>
-            <GeniusButton color={"#ff9900"} roundedCorner={"bottom-left"} onClick={() => handleCombinedClick('#ff9900')} disabled={!clickable} />
-            <GeniusButton color={"green"} roundedCorner={"bottom-right"} onClick={() => handleCombinedClick('green')} disabled={!clickable} />
+            <GeniusButton color={"#ff9900"} lightColor={'radial-gradient(69.01% 47.53% at 50% 50%, rgba(255, 255, 185, 0.86) 0%, rgba(255, 255, 0, 0.86) 51%, rgba(255, 214, 0, 0.86) 100%), #FFD600'} roundedCorner={"bottom-left"} onClick={() => handleCombinedClick('#ff9900')} disabled={!clickable} />
+            <GeniusButton color={"green"} lightColor={'radial-gradient(96.54% 52.86% at 50.22% 49.83%, rgba(255, 255, 255, 0.50) 0%, rgba(148, 255, 131, 0.50) 38%, rgba(95, 216, 75, 0.50) 69%, rgba(27, 191, 0, 0.50) 99%), #1BBF00'} roundedCorner={"bottom-right"} onClick={() => handleCombinedClick('green')} disabled={!clickable} />
           </div>
         </div>
       </div>

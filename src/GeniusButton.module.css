@@ -15,22 +15,6 @@
   transform: scale(0.95);
 }
 
-.geniusButton[data-color="red"] {
-  background-color: red;
-}
-
-.geniusButton[data-color="green"] {
-  background-color: green;
-}
-
-.geniusButton[data-color="blue"] {
-  background-color: blue;
-}
-
-.geniusButton[data-color="#ff9900"] {
-  background-color: #ff9900;
-}
-
 .geniusButton[data-rounded-corner="top-left"] {
   border-radius: 90% 10% 10% 10%;
   height: 5rem;
