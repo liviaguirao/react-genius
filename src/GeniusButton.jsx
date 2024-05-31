@@ -2,14 +2,14 @@ import React from 'react';
 import styles from "./GeniusButton.module.css";
 import { motion } from 'framer-motion';
 
-export default function GeniusButton({ color, lightColor, onClick, roundedCorner, disabled }) {
+export default function GeniusButton({ color, lightColor, onClick, roundedCorner, disabled, Blink }) {
   const variants = {
     normal: {
       backgroundColor: color,
       transition: { duration: 0.2 }
     },
     blinking: {
-      backgroundColor: lightColor,
+      backgroundColor: 'white',
       transition: { duration: 0.2, yoyo: Infinity }
     }
   };
@@ -21,6 +21,7 @@ export default function GeniusButton({ color, lightColor, onClick, roundedCorner
       className={`${styles.geniusButton} ${disabled ? styles.disabled : ''}`}
       data-rounded-corner={roundedCorner}
       onClick={() => !disabled && onClick(color)} // Ignora cliques se desabilitado
+      animate={Blink ? "blinking" : "normal"}
     />
   );
 }
