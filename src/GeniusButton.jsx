@@ -9,7 +9,7 @@ export default function GeniusButton({ color, lightColor, onClick, roundedCorner
       transition: { duration: 0.2 }
     },
     blinking: {
-      backgroundColor: 'white',
+      backgroundColor: lightColor,
       transition: { duration: 0.2, yoyo: Infinity }
     }
   };
