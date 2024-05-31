@@ -14,37 +14,6 @@ function Layout() {
   const sequenceclick = useRef(0);
   const nivelRef = useRef(0);
   const nivelMaximo = useRef(1);
-  const audioContext = useRef(null);
-  const oscillator = useRef(null);
-  const gainNode = useRef(null);
-
-  useEffect(() => {
-    audioContext.current = new (window.AudioContext || window.webkitAudioContext)();
-    return () => {
-      if (audioContext.current) {
-        audioContext.current.close();
-      }
-    };
-  }, []);
-
-  const startOscillator = (frequency) => {
-    oscillator.current = audioContext.current.createOscillator();
-    gainNode.current = audioContext.current.createGain();
-    oscillator.current.frequency.value = frequency;
-    oscillator.current.type = 'sine';
-    oscillator.current.connect(gainNode.current);
-    gainNode.current.connect(audioContext.current.destination);
-    oscillator.current.start(0);
-    gainNode.current.gain.exponentialRampToValueAtTime(0.00001, audioContext.current.currentTime + 0.5);
-  };
-
-  const stopOscillator = () => {
-    if (oscillator.current) {
-      oscillator.current.stop();
-      oscillator.current.disconnect();
-      gainNode.current.disconnect();
-    }
-  };
 
   const startGame = () => {
     setShowErrorButton(false);
@@ -94,27 +63,8 @@ function Layout() {
     }
   };
 
-  const getFrequencyFromColor = (color) => {
-    switch (color) {
-      case 'red':
-        return 250;
-      case 'blue':
-        return 500;
-      case '#ff9900':
-        return 800;
-      case 'green':
-        return 1100;
-      default:
-        return 440.0;
-    }
-  };
-
   async function blinkButton(color) {
-    /*const lightColor = getLightColor(color);*/
-    /*const button = document.getElementById(color);*/
-    const frequency = getFrequencyFromColor(color);
-    startOscillator(frequency);
-    /*button.style.background = lightColor;*/
+
     if(color === 'red')
       setBlinkRed(true);
     else if(color === 'blue')
@@ -122,30 +72,15 @@ function Layout() {
     else if(color === 'green')
       setBlinkGreen(true);
     else {setBlinkYellow(true)};
+
     await sleep(500);
-    /*button.style.background = color;*/
+
     setBlinkRed(false);
     setBlinkBlue(false);
     setBlinkGreen(false);
     setBlinkYellow(false);
-    stopOscillator();
+
   }
-/*
-  const getLightColor = (color) => {
-    switch (color) {
-      case 'red':
-        return 'radial-gradient(96.6% 60.29% at 50% 50%, rgba(255, 255, 255, 0.50) 0%, rgba(233, 0, 0, 0.50) 100%), #F30000';
-      case 'blue':
-        return 'radial-gradient(103% 67.48% at 50% 50%, rgba(222, 221, 255, 0.50) 0%, rgba(4, 0, 191, 0.50) 100%), #0400D0';
-      case '#ff9900':
-        return 'radial-gradient(69.01% 47.53% at 50% 50%, rgba(255, 255, 185, 0.86) 0%, rgba(255, 255, 0, 0.86) 51%, rgba(255, 214, 0, 0.86) 100%), #FFD600';
-      case 'green':
-        return 'radial-gradient(96.54% 52.86% at 50.22% 49.83%, rgba(255, 255, 255, 0.50) 0%, rgba(148, 255, 131, 0.50) 38%, rgba(95, 216, 75, 0.50) 69%, rgba(27, 191, 0, 0.50) 99%), #1BBF00';
-      default:
-        return '';
-    }
-  };
-  */
 
   const sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -198,12 +133,12 @@ function Layout() {
         <div className={styles.circulo}>
           <button className={styles.botaoStart} onClick={startGame}>Start</button>
           <div>
-            <GeniusButton color={"red"} lightColor={'#F30000'} roundedCorner={"top-left"} onClick={() => handleCombinedClick('red')} disabled={!clickable} Blink={BlinkRed}/>
-            <GeniusButton color={"blue"} lightColor={'#0400D0'} roundedCorner={"top-right"} onClick={() => handleCombinedClick('blue')} disabled={!clickable} Blink={BlinkBlue}/>
+            <GeniusButton frequency={250} color={"red"} lightColor={'radial-gradient(96.6% 60.29% at 50% 50%, rgba(255, 255, 255, 0.50) 0%, rgba(233, 0, 0, 0.50) 100%), #F30000'} roundedCorner={"top-left"} onClick={() => handleCombinedClick('red')} disabled={!clickable} Blink={BlinkRed}/>
+            <GeniusButton frequency={500} color={"blue"} lightColor={'radial-gradient(103% 67.48% at 50% 50%, rgba(222, 221, 255, 0.50) 0%, rgba(4, 0, 191, 0.50) 100%), #0400D0'} roundedCorner={"top-right"} onClick={() => handleCombinedClick('blue')} disabled={!clickable} Blink={BlinkBlue}/>
           </div>
           <div>
-            <GeniusButton color={"#ff9900"} lightColor={'#FFD600'} roundedCorner={"bottom-left"} onClick={() => handleCombinedClick('#ff9900')} disabled={!clickable} Blink={BlinkYellow}/>
-            <GeniusButton color={"green"} lightColor={'#1BBF00'} roundedCorner={"bottom-right"} onClick={() => handleCombinedClick('green')} disabled={!clickable} Blink={BlinkGreen}/>
+            <GeniusButton frequency={800} color={"#ff9900"} lightColor={'radial-gradient(69.01% 47.53% at 50% 50%, rgba(255, 255, 185, 0.86) 0%, rgba(255, 255, 0, 0.86) 51%, rgba(255, 214, 0, 0.86) 100%), #FFD600'} roundedCorner={"bottom-left"} onClick={() => handleCombinedClick('#ff9900')} disabled={!clickable} Blink={BlinkYellow}/>
+            <GeniusButton frequency={1100} color={"green"} lightColor={'radial-gradient(96.54% 52.86% at 50.22% 49.83%, rgba(255, 255, 255, 0.50) 0%, rgba(148, 255, 131, 0.50) 38%, rgba(95, 216, 75, 0.50) 69%, rgba(27, 191, 0, 0.50) 99%), #1BBF00'} roundedCorner={"bottom-right"} onClick={() => handleCombinedClick('green')} disabled={!clickable} Blink={BlinkGreen}/>
           </div>
         </div>
       </div>
