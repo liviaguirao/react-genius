@@ -79,7 +79,6 @@ function Layout() {
     setBlinkBlue(false);
     setBlinkGreen(false);
     setBlinkYellow(false);
-
   }
 
   const sleep = (ms) => {

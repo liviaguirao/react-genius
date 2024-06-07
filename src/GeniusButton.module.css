@@ -32,10 +32,15 @@
 .geniusButton[data-rounded-corner="bottom-left"] {
   border-radius: 10% 10% 10% 90%;
 }
+/*
+.geniusButton[data-cor="red"]{
+  
+}*/
 
-.disabled {
+.geniusButton:disabled {
   pointer-events: none; /* Desativa os eventos de ponteiro, incluindo cliques */
    /*opacity: 0.5; /* Torna os botões visualmente desativados */
   cursor: not-allowed; /* Altera o cursor para indicar que está desativado */
   transform: none; /* Remove qualquer transformação ativa */
+  filter: invert();
 }

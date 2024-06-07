@@ -6,17 +6,6 @@ export default function GeniusButton({ frequency, color, lightColor, onClick, ro
   const oscillator = useRef(null);
   const gainNode = useRef(null);
 
-  const variants = {
-    normal: {
-      backgroundColor: color,
-      transition: { duration: 0.2 }
-    },
-    blinking: {
-      background: lightColor,
-      transition: { duration: 0.2, yoyo: Infinity}
-    }
-  };
-
   useEffect(() => {
     if (Blink) {
       startOscillator();
@@ -52,14 +41,27 @@ export default function GeniusButton({ frequency, color, lightColor, onClick, ro
     }
   };
 
+  const variants = {
+    normal: {
+      backgroundColor: color,
+      transition: { duration: 0.2 }
+    },
+    blinking: {
+      background: lightColor,
+      transition: { duration: 0.2, yoyo: Infinity}
+    }
+  };
+
   return (
     <motion.button
       variants={variants}
       initial="normal"
       id={color}
-      className={`${styles.geniusButton} ${disabled ? styles.disabled : ''}`}
+      className={styles.geniusButton}
+      data-cor={color}
+      disabled = {disabled}
       data-rounded-corner={roundedCorner}
-      onClick={() => !disabled && onClick(color)}
+      onClick={() => {alert("OI"); onClick(color)}}
       animate={Blink ? "blinking" : "normal"}
     />
   );
