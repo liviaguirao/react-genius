@@ -11,6 +11,22 @@
   z-index: 0;
 }
 
+.geniusButtonRED {
+  background-color: red;
+}
+
+.geniusButtonBLUE {
+  background-color: blue;
+}
+
+.geniusButtonYELLOW {
+  background-color: yellow;
+}
+
+.geniusButtonGREEN {
+  background-color: green;
+}
+
 .geniusButton:active {
   transform: scale(0.95);
 }
@@ -42,5 +58,4 @@
    /*opacity: 0.5; /* Torna os botões visualmente desativados */
   cursor: not-allowed; /* Altera o cursor para indicar que está desativado */
   transform: none; /* Remove qualquer transformação ativa */
-  filter: invert();
 }

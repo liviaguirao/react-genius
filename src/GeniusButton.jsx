@@ -41,9 +41,22 @@ export default function GeniusButton({ frequency, color, lightColor, onClick, ro
     }
   };
 
+  /// Assim eu seleciono qual o css vou pegar, passando ele como classname lá em baixo.
+  /// desse modo, para acessar os elementos basta usar coloClass.backgroudcolor etc
+  const colorClasses = {
+    red: styles.geniusButtonRED,
+    blue: styles.geniusButtonBLUE,
+    yellow: styles.geniusButtonYELLOW,
+    green: styles.geniusButtonGREEN,
+  };
+  
+  const colorClass = colorClasses[color] || styles.geniusButton;
+
+  /////////////////////////////////////////////////
+ 
   const variants = {
     normal: {
-      backgroundColor: color,
+      backgroundColor: colorClass.backgroundColor,
       transition: { duration: 0.2 }
     },
     blinking: {
@@ -52,17 +65,20 @@ export default function GeniusButton({ frequency, color, lightColor, onClick, ro
     }
   };
 
+  
+
   return (
     <motion.button
       variants={variants}
       initial="normal"
       id={color}
-      className={styles.geniusButton}
+      className={`${styles.geniusButton} ${colorClass}`}
       data-cor={color}
       disabled = {disabled}
       data-rounded-corner={roundedCorner}
-      onClick={() => {alert("OI"); onClick(color)}}
+      onClick={() => {onClick(color)}}
       animate={Blink ? "blinking" : "normal"}
     />
   );
 }
+
