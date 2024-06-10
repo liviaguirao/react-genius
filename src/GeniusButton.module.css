@@ -1,0 +1,40 @@
+.geniusButton {
+  width: 112px;
+  height: 100px;
+  margin: 0.3rem;
+  border: none;
+  border-radius: 0%;
+  box-shadow: 0px 4px 2px rgba(187, 187, 187, 0.466);
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+  z-index: 0;
+}
+
+.geniusButton:active {
+  transform: scale(0.95);
+}
+
+.geniusButton[data-rounded-corner="top-left"] {
+  border-radius: 90% 10% 10% 10%;
+  height: 5rem;
+}
+
+.geniusButton[data-rounded-corner="top-right"] {
+  border-radius: 10% 90% 10% 10%;
+  height: 5rem;
+}
+
+.geniusButton[data-rounded-corner="bottom-right"] {
+  border-radius: 10% 10% 90% 10%;
+}
+
+.geniusButton[data-rounded-corner="bottom-left"] {
+  border-radius: 10% 10% 10% 90%;
+}
+.geniusButton:disabled {
+  pointer-events: none; /* Desativa os eventos de ponteiro, incluindo cliques */
+ /* opacity: 0.5; /* Torna os botões visualmente desativados */
+  cursor: not-allowed; /* Altera o cursor para indicar que está desativado */
+  transform: none; /* Remove qualquer transformação ativa */
+}
