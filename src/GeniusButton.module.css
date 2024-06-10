@@ -15,22 +15,6 @@
   transform: scale(0.95);
 }
 
-.geniusButton[data-color="red"] {
-  background-color: red;
-}
-
-.geniusButton[data-color="green"] {
-  background-color: green;
-}
-
-.geniusButton[data-color="blue"] {
-  background-color: blue;
-}
-
-.geniusButton[data-color="#ff9900"] {
-  background-color: #ff9900;
-}
-
 .geniusButton[data-rounded-corner="top-left"] {
   border-radius: 90% 10% 10% 10%;
   height: 5rem;
@@ -48,10 +32,9 @@
 .geniusButton[data-rounded-corner="bottom-left"] {
   border-radius: 10% 10% 10% 90%;
 }
-
-.disabled {
+.geniusButton:disabled {
   pointer-events: none; /* Desativa os eventos de ponteiro, incluindo cliques */
-   /*opacity: 0.5; /* Torna os botões visualmente desativados */
+ /* opacity: 0.5; /* Torna os botões visualmente desativados */
   cursor: not-allowed; /* Altera o cursor para indicar que está desativado */
   transform: none; /* Remove qualquer transformação ativa */
 }
