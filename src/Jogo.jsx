@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import GeniusButton from "./GeniusButton";
-import styles from "./Layout.module.css";
+import styles from "./Jogo.module.css";
 
-function Layout() {
+function Jogo() {
   const [sequence, setSequence] = useState([]);
   const [clickable, setClickable] = useState(false);
   const [showErrorButton, setShowErrorButton] = useState(false);
@@ -65,13 +65,13 @@ function Layout() {
 
   async function blinkButton(color) {
 
-    if(color === 'red')
+    if (color === 'red')
       setBlinkRed(true);
-    else if(color === 'blue')
+    else if (color === 'blue')
       setBlinkBlue(true);
-    else if(color === 'green')
+    else if (color === 'green')
       setBlinkGreen(true);
-    else {setBlinkYellow(true)};
+    else { setBlinkYellow(true) };
 
     await sleep(500);
 
@@ -86,12 +86,10 @@ function Layout() {
   };
 
   function verifica(color) {
-    console.log(" sequenceclick " + sequenceclick.current);
     var acertou = true;
 
     if (color !== getColorFromNumber(sequence[sequenceclick.current])) {
       acertou = false;
-      console.log('cor selecionada: ' + color + ' alternativa correta: ' + getColorFromNumber(sequence[sequenceclick.current]));
     }
     if (!acertou) {
       setShowErrorButton(true);
@@ -120,34 +118,34 @@ function Layout() {
   }
 
   return (
-    <div className={styles.body}>
-      <h1>GENIUS</h1>
-      <div className={styles.jogo}>
+    <body>
+        <h1>GENIUS</h1>
+        <div className={styles.jogo}>
           <button
             className={styles.botaoErro}
-            disabled = {!showErrorButton}
+            disabled={!showErrorButton}
             onClick={startGame} >
             Você errou, clique aqui para tentar novamente
           </button>
-        <div className={styles.circulo}>
-          <button className={styles.botaoStart} onClick={startGame}>Start</button>
-          <div>
-            <GeniusButton frequency={250} color={"red"} lightColor={'radial-gradient(96.6% 60.29% at 50% 50%, rgba(255, 255, 255, 0.50) 0%, rgba(233, 0, 0, 0.50) 100%), #F30000'} roundedCorner={"top-left"} onClick={() => handleCombinedClick('red')} disabled={!clickable} Blink={BlinkRed}/>
-            <GeniusButton frequency={500} color={"blue"} lightColor={'radial-gradient(103% 67.48% at 50% 50%, rgba(222, 221, 255, 0.50) 0%, rgba(4, 0, 191, 0.50) 100%), #0400D0'} roundedCorner={"top-right"} onClick={() => handleCombinedClick('blue')} disabled={!clickable} Blink={BlinkBlue}/>
-          </div>
-          <div>
-            <GeniusButton frequency={800} color={"yellow"} lightColor={'radial-gradient(69.01% 47.53% at 50% 50%, rgba(255, 255, 185, 0.86) 0%, rgba(255, 255, 0, 0.86) 51%, rgba(255, 214, 0, 0.86) 100%), #FFD600'} roundedCorner={"bottom-left"} onClick={() => handleCombinedClick('#ff9900')} disabled={!clickable} Blink={BlinkYellow}/>
-            <GeniusButton frequency={1100} color={"green"} lightColor={'radial-gradient(96.54% 52.86% at 50.22% 49.83%, rgba(255, 255, 255, 0.50) 0%, rgba(148, 255, 131, 0.50) 38%, rgba(95, 216, 75, 0.50) 69%, rgba(27, 191, 0, 0.50) 99%), #1BBF00'} roundedCorner={"bottom-right"} onClick={() => handleCombinedClick('green')} disabled={!clickable} Blink={BlinkGreen}/>
+          <div className={styles.circulo}>
+            <button className={styles.botaoStart} onClick={startGame} disabled={clickable}>Start</button>
+            <div>
+              <GeniusButton color={"red"} onClick={() => handleCombinedClick('red')} disabled={!clickable} Blink={BlinkRed} />
+              <GeniusButton color={"blue"} onClick={() => handleCombinedClick('blue')} disabled={!clickable} Blink={BlinkBlue} />
+            </div>
+            <div>
+              <GeniusButton color={"yellow"} onClick={() => handleCombinedClick('#ff9900')} disabled={!clickable} Blink={BlinkYellow} />
+              <GeniusButton color={"green"} onClick={() => handleCombinedClick('green')} disabled={!clickable} Blink={BlinkGreen} />
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className={styles.status}>
-        <span>Nível: {nivelRef.current + 1}</span>
-        <span>Nível máximo: {nivelMaximo.current}</span>
-      </div>
-    </div>
+        <div className={styles.status}>
+          <span>Nível: {nivelRef.current + 1}</span>
+          <span>Nível máximo: {nivelMaximo.current}</span>
+        </div>
+    </body>
   );
 }
 
-export default Layout;
+export default Jogo;
